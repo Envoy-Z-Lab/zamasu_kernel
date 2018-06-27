@@ -22,6 +22,7 @@ static unsigned short kcal_hue = 0;
 static unsigned short kcal_sat = 255;
 static unsigned short kcal_val = 255;
 static unsigned short kcal_cont = 255;
+<<<<<<< HEAD
 
 <<<<<<< HEAD
 #ifdef CONFIG_KLAPSE
@@ -49,6 +50,9 @@ module_param(kcal_sat, uint, 0644);
 module_param(kcal_val, uint, 0644);
 module_param(kcal_cont, uint, 0644);
 =======
+=======
+
+>>>>>>> c947881b5580 (drm: msm: kcal: make the userspace module param vars static and use short instead of integers)
 module_param(kcal_red, short, 0644);
 module_param(kcal_green, short, 0644);
 module_param(kcal_blue, short, 0644);
@@ -56,6 +60,9 @@ module_param(kcal_hue, short, 0644);
 module_param(kcal_sat, short, 0644);
 module_param(kcal_val, short, 0644);
 module_param(kcal_cont, short, 0644);
+<<<<<<< HEAD
+>>>>>>> c947881b5580 (drm: msm: kcal: make the userspace module param vars static and use short instead of integers)
+=======
 >>>>>>> c947881b5580 (drm: msm: kcal: make the userspace module param vars static and use short instead of integers)
 
 static int sde_write_3d_gamut(struct sde_hw_blk_reg_map *hw,

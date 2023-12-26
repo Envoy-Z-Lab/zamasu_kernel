@@ -307,17 +307,3 @@ void sde_setup_dspp_pccv4(struct sde_hw_dspp *ctx, void *cfg)
 
 	SDE_REG_WRITE(&ctx->hw, ctx->cap->sblk->pcc.base, PCC_EN);
 }
-blk->hsic.base + PA_VAL_OFF,
-		kcal_val & PA_VAL_MASK);
-	local_opcode |= PA_VAL_EN;
-
-	// CONTRAST
-	SDE_REG_WRITE(&ctx->hw, ctx->cap->sblk->hsic.base + PA_CONT_OFF,
-		kcal_cont & PA_CONT_MASK);
-	local_opcode |= PA_CONT_EN;
-
-	opcode |= (local_opcode | PA_EN);
-	SDE_REG_WRITE(&ctx->hw, ctx->cap->sblk->hsic.base, opcode);
-
-	SDE_REG_WRITE(&ctx->hw, ctx->cap->sblk->pcc.base, PCC_EN);
-}

@@ -15,16 +15,6 @@
 #include "sde_hw_color_proc_common_v4.h"
 #include "sde_hw_color_proc_v4.h"
 
-static unsigned short kcal_red = 256;
-static unsigned short kcal_green = 256;
-static unsigned short kcal_blue = 256;
-static unsigned short kcal_hue = 0;
-static unsigned short kcal_sat = 255;
-static unsigned short kcal_val = 255;
-static unsigned short kcal_cont = 255;
-<<<<<<< HEAD
-
-<<<<<<< HEAD
 #ifdef CONFIG_KLAPSE
 #include "klapse.h"
 
@@ -40,19 +30,7 @@ static unsigned short kcal_hue = 0;
 static unsigned short kcal_sat = 255;
 static unsigned short kcal_val = 255;
 static unsigned short kcal_cont = 255;
->>>>>>> 7aaa00b85fd6 (Introducing KLapse - A kernel level livedisplay module v4.0:)
 
-module_param(kcal_red, uint, 0644);
-module_param(kcal_green, uint, 0644);
-module_param(kcal_blue, uint, 0644);
-module_param(kcal_hue, uint, 0644);
-module_param(kcal_sat, uint, 0644);
-module_param(kcal_val, uint, 0644);
-module_param(kcal_cont, uint, 0644);
-=======
-=======
-
->>>>>>> c947881b5580 (drm: msm: kcal: make the userspace module param vars static and use short instead of integers)
 module_param(kcal_red, short, 0644);
 module_param(kcal_green, short, 0644);
 module_param(kcal_blue, short, 0644);
@@ -60,10 +38,6 @@ module_param(kcal_hue, short, 0644);
 module_param(kcal_sat, short, 0644);
 module_param(kcal_val, short, 0644);
 module_param(kcal_cont, short, 0644);
-<<<<<<< HEAD
->>>>>>> c947881b5580 (drm: msm: kcal: make the userspace module param vars static and use short instead of integers)
-=======
->>>>>>> c947881b5580 (drm: msm: kcal: make the userspace module param vars static and use short instead of integers)
 
 static int sde_write_3d_gamut(struct sde_hw_blk_reg_map *hw,
 		struct drm_msm_3d_gamut *payload, u32 base,
@@ -320,6 +294,20 @@ void sde_setup_dspp_pccv4(struct sde_hw_dspp *ctx, void *cfg)
 
 	// VALUE
 	SDE_REG_WRITE(&ctx->hw, ctx->cap->sblk->hsic.base + PA_VAL_OFF,
+		kcal_val & PA_VAL_MASK);
+	local_opcode |= PA_VAL_EN;
+
+	// CONTRAST
+	SDE_REG_WRITE(&ctx->hw, ctx->cap->sblk->hsic.base + PA_CONT_OFF,
+		kcal_cont & PA_CONT_MASK);
+	local_opcode |= PA_CONT_EN;
+
+	opcode |= (local_opcode | PA_EN);
+	SDE_REG_WRITE(&ctx->hw, ctx->cap->sblk->hsic.base, opcode);
+
+	SDE_REG_WRITE(&ctx->hw, ctx->cap->sblk->pcc.base, PCC_EN);
+}
+blk->hsic.base + PA_VAL_OFF,
 		kcal_val & PA_VAL_MASK);
 	local_opcode |= PA_VAL_EN;
 
